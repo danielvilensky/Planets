@@ -251,3 +251,333 @@ const pigLatin = (str) => {
   return pigTranslation.join(" ");
 };
 console.log(pigLatin("Tom got a small piece of pie."));
+
+/* Count characters only Create a function will calculate how many times empty space occurred in a given string by the user and print out only the characters number
+
+Example :
+
+emptySpaces("Hi i") -> 3 */
+
+const emptySpaces = (str) => {
+  let strToArr = str.split("");
+
+  for (let i = 0; i < str.length; i++)
+    if (strToArr[i] == " ") {
+      strToArr[i] = "";
+    }
+  return strToArr.join("").length;
+};
+
+console.log(emptySpaces("Hi i am"));
+
+/* Need more money Create a function that will receive a (user name , salary and his/her kids names)
+
+If the user has one kid subtract 30% taxes from the salary
+For two kids subtract 25% and 20% for more than two.
+If the user has no kids the taxes will be 55%
+Print out the result in a good formated way.
+Examples :
+
+salaryCalculator("Fabi", 5000, "Zain", "Uschi");
+
+salaryCalculator("Olga", 4055, "Zain"); */
+
+const salaryCalculator = (name, salary, ...args) => {
+  let result;
+  let namePerson = name;
+  let kids = args.length;
+
+  if (kids == 1) {
+    salary = salary - (salary / 100) * 30;
+  } else if (kids == 2) {
+    salary = salary - (salary / 100) * 25;
+  } else if (kids > 2) {
+    salary = salary - (salary / 100) * 20;
+  }
+  return `${namePerson}´s salary is ${salary} after paying taxes`;
+};
+
+console.log(salaryCalculator("Fabi", 5000, "Zain", "Uschi"));
+console.log(salaryCalculator("Olga", 4055, "Zain"));
+console.log(salaryCalculator("Igal", 4055, "Zain", "Zain", "Zain"));
+
+/* Call me Create a function that receive a text from user and check if the user has entered a phone number, and print that out.
+
+Note : phone number should be within the German network starts with (030 or 017) only and has 7 digits after the prefix number
+
+Examples :
+
+phone("Hi, call me on 030221A398 "); -> This is not a valid phone number 030221A398
+
+phone("Hi my number is 038 "); -> This is not a valid phone number 038 */
+
+const phone = (str) => {
+  let strToArr1 = str.split("");
+  let numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+  let phoneFirstNum = ["0", "3", "0"];
+  let phoneFirstNum2 = ["0", "1", "7"];
+  let phoneNumber = [];
+
+  for (let i = 0; i < strToArr1.length; i++) {
+    for (let j = 0; j < numbers.length; j++)
+      if (strToArr1[i] == numbers[j]) {
+        phoneNumber.push(strToArr1[i]);
+      }
+    if (phoneNumber.length > 7) {
+      return `This is not a valid phone number ${phoneNumber}`;
+    }
+    if (
+      phoneNumber[0] !== phoneFirstNum[0] ||
+      phoneNumber[1] !== phoneFirstNum[1] ||
+      phoneNumber[2] !== phoneFirstNum[2] ||
+      phoneNumber[0] !== phoneFirstNum2[0] ||
+      phoneNumber[1] !== phoneFirstNum2[1] ||
+      phoneNumber[2] !== phoneFirstNum2[2]
+    ) {
+      return `This is not a valid phone number start ${phoneNumber}`;
+    }
+  }
+  phoneNumber = phoneNumber.join("");
+  return `Hi, call me on ${phoneNumber}`;
+};
+
+console.log(phone("Hi, call me on 030221200a "));
+
+// no solution!!!
+
+/* IsBank Write a function that checks whether the user has entered a valid German bank account.
+
+Note: German bank accounts should starts with DE and has 20 number after that.
+
+// DExxxxxxxxxxxxxxxxxxxx
+
+Examples :
+
+bankChecker("Hi, why you need my bank account? "); -> There was no bank account in the text
+
+bankChecker("I delete, have bank DE"); -> This is not a valid bank account
+
+bankChecker("DE12100110013000400011")); -> The bank account DE12100110013000400011 is valid */
+
+const bankChecker = (str) => {
+  let result;
+  let accountDigit = [];
+
+  let strToArray = str.split("");
+  let accountNum = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+
+  for (let i = 0; i < strToArray.length; i++) {
+    for (let j = 0; j < accountNum.length; j++)
+      if (strToArray[i] == accountNum[j]) {
+        accountDigit.push(strToArray[i]);
+        console.log(accountDigit);
+      }
+    if (strToArray.length > 20) {
+      result = `This is not a valid bank account`;
+    }
+  }
+  return result;
+};
+
+console.log(bankChecker("DE12100110013000400011"));
+
+// for later!!!
+
+/* This is crazy Create a function that looks inside a givin string if it has the word (JavaScript) if so print "I know it's crazy wink".
+
+Examples :
+
+checkStr("Hi my name is HADI");
+
+checkStr("I like JavaScript"); */
+
+const checkStr = (str) => {
+  let result;
+  let word = "JavaScript";
+
+  for (let i = 0; i < str.length; i++) {
+    if (str.includes(word)) {
+      result = "I know it's crazy wink";
+    } else {
+      result = "There is no ´JavaScript´ word in thr sentence";
+    }
+  }
+  return result;
+};
+
+console.log(checkStr("Hi my name is HADI"));
+console.log(checkStr("I like JavaScript"));
+
+/* Tell me my age Create a function that calculates the user age e.g. 2000 -> 20.
+
+// tip try mdn for this one aka need some research
+
+Examples :
+
+age(1940) -> 81
+
+age(2022)) -> Please enter a valid year */
+
+const age = (int) => {
+  let result;
+
+  let currentYear = 2021;
+  if (int > 2021) {
+    result = `Please enter a valid year`;
+  } else {
+    result = currentYear - int;
+  }
+
+  return result;
+};
+
+console.log(age(1940));
+console.log(age(2022));
+
+/* Seasons Create a function that accepts a text from user and check if the user has entered a month name, if so print out that month and in which season it is.
+
+// I will be nice again to you and offer the arrays wink
+
+const months = [ "december", "january", "february", "march", "april", "may", "jun", "july", "august", "september", "october", "november" ];
+
+const seasons = ["Winter", "Spring", "Summer", "Autumn"];
+
+Examples :
+
+monthCheck("I love Jun"); -> Jun is in Summer
+
+monthCheck("We need Kartoffel"); -> I couldn’t find any month in your text, sorry try again */
+
+const months = [
+  "december",
+  "january",
+  "february",
+  "march",
+  "april",
+  "may",
+  "june",
+  "july",
+  "august",
+  "september",
+  "october",
+  "november",
+];
+const seasons = ["Winter", "Spring", "Summer", "Autumn"];
+
+const monthCheck = (str) => {
+  let strToArr = str.split(" ");
+
+  let result;
+  for (let i = 0; i < strToArr.length; i++) {
+    if (
+      strToArr[i] == months[0] ||
+      strToArr[i] == months[1] ||
+      strToArr[i] == months[2]
+    ) {
+      result = `Winter`;
+      /* switch (months) {
+        case strToArr[i] == months[0]:
+          return "december";
+        case months[1]:
+          return "january";
+        case months[2]:
+          return "february";
+        default:
+          return "sss";
+      } */
+    } else if (
+      strToArr[i] == months[3] ||
+      strToArr[i] == months[4] ||
+      strToArr[i] == months[5]
+    ) {
+      result = "Spring";
+    } else if (
+      strToArr[i] == months[6] ||
+      strToArr[i] == months[7] ||
+      strToArr[i] == months[8]
+    ) {
+      result = "Summer";
+    } else if (
+      strToArr[i] == months[9] ||
+      strToArr[i] == months[10] ||
+      strToArr[i] == months[11]
+    ) {
+      result = "Autumn";
+    } else {
+      result = `I couldn’t find any month in your text, sorry try again`;
+    }
+  }
+
+  return result;
+};
+
+console.log(monthCheck("I love march"));
+console.log(monthCheck("We need Kartoffel"));
+
+// not finished!!!
+
+/* Student level check Create a function will calculate a student degrees for 6 subjects, if the average was less than 70 will print (F)
+
+Over 70 and less than 80 (C)
+
+Over than 80 and less than 85 (B)
+
+Over than 85 and less than 90 (A)
+
+And over 90 print (A+)
+
+Example :
+
+studentAverage(99, 44, 44, 80, 80, 98, 89); */
+
+const studentAverage = (...nums) => {
+  let summerize = 0;
+  let result;
+  for (let i = 0; i < nums.length; i++) {
+    summerize += nums[i];
+  }
+  if (summerize / nums.length >= 90) {
+    result = `Your grade is A+`;
+  } else if (summerize / nums.length > 85 && nums.length < 90) {
+    result = "Your grade is A";
+  } else if (summerize / nums.length > 80 && nums.length < 85) {
+    result = "Your grade is B";
+  } else if (summerize / nums.length > 70 && nums.length < 80) {
+    result = "Your grade is C";
+  }
+
+  return result;
+};
+
+console.log(studentAverage(99, 44, 44, 80, 80, 98, 89));
+
+/* Tell me more Create a function that accepts the (user name, age, address and unlimited number of activities the user enjoy doing)
+
+print all the user input adding the greeting part and more text turning that input into a readable text.
+
+If one of his activities was dance or party add "you are cool" to your outputted text.
+
+Examples :
+
+userData("Zain", 22, "Kurfürstendamm", "dance", "party");
+
+userData("Olga", 40, "potsdamer platz", "party");
+
+userData("Nancy", 33, "viktoria luise platz", "swimming"); */
+
+const userData = (user, age, address, ...args) => {
+  let greet = `Hi`;
+  let addText = "you are cool";
+  let result = `${greet} ${user} ${age} ${address}`;
+  {
+    if (args.includes("dance") || args.includes("party")) {
+      result = `${greet} ${user} ${age} ${address} ${addText}`;
+    }
+  }
+
+  return result;
+};
+
+console.log(userData("Zain", 22, "Kurfürstendamm", "party"));
+
+console.log(userData("Nancy", 33, "viktoria luise platz", "swimming"));
