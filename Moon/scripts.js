@@ -581,3 +581,34 @@ const userData = (user, age, address, ...args) => {
 console.log(userData("Zain", 22, "Kurfürstendamm", "party"));
 
 console.log(userData("Nancy", 33, "viktoria luise platz", "swimming"));
+
+// Given a number, return an array containing the two halves of the number. If the number is odd, make the rightmost number higher.
+
+// Examples
+// numberSplit(4) ➞ [2, 2]
+
+// numberSplit(10) ➞ [5, 5]
+
+// numberSplit(11) ➞ [5, 6]
+
+// numberSplit(-9) ➞ [-5, -4]
+// Notes
+// All numbers will be integers.
+// You can expect negative numbers too.
+
+const numberSplit = (n) => {
+  let result;
+  if (n % 2 !== 0) {
+    result = (n - 1) / 2;
+    result = [result, result + 1];
+  } else {
+    result = n / 2;
+    result = [result, result];
+  }
+
+  return result;
+};
+
+console.log(numberSplit(4));
+console.log(numberSplit(11));
+console.log(numberSplit(-9));
